@@ -1,55 +1,27 @@
-# Sunlit Secrets — The Hidden Thought
+# Sunlit Secrets — Image-Reliable Edition
 
-A cozy, ad-free, number-and-word puzzle game with **2,400 playable levels** and the exact sunset-balcony scenery you supplied.
+This fixes the missing-background issue. The two original supplied scenic backgrounds, the full 2,400-level puzzle data and all game code are **embedded directly into index.html**. The page does not request separate CSS, JS, or background assets, so uploading `index.html` alone is enough to play online or from a local file.
 
-## What you get
+## Replace the old GitHub Pages version
 
-- Beautiful, uncluttered start screen featuring your glowing lakeside bunny-balcony background
-- Beautiful gameplay screen using your floral lake background and warm wooden puzzle panels
-- Number-to-letter cryptogram clues that reveal a hidden saying
-- 2,400 distinct hidden sayings, including 48 individually authored originals and 2,352 template-built variations
-- Level progression in **strict order**: finish the current level before unlocking the next
-- Unlimited free hints, erase, check answers, touch-friendly QWERTY keyboard and physical keyboard support
-- Automatic local progress, backup/restore, optional sound and animation settings
-- No ads, subscription, external analytics, account or tracking; static files only
-- Progressive web app (PWA) and offline cache after the first successful online visit
+1. Unzip this archive.
+2. Open your GitHub game repository. Remove or overwrite the old `index.html`, `manifest.webmanifest`, `sw.js` and `assets` content. Upload the **contents** of this ZIP, not the ZIP itself, making sure `index.html` is at the root of the repository.
+3. Wait for GitHub Pages to publish the commit.
+4. **Important for people who installed the previous edition:** Open `https://YOUR-USERNAME.github.io/YOUR-REPO/index.html?release=v4-imagefix-20261028` in Safari. This exact query string bypasses the original service worker's cached homepage and installs the replacement cache. Reload once after the new page opens. If an old iPhone Home Screen icon still shows the broken edition, remove that icon and add the updated site to your Home Screen again.
+5. Once the updated game loads, test offline use by disconnecting Wi-Fi/mobile data after the initial successful installation.
 
-## Publish on GitHub Pages
+## What is included
 
-1. Unzip the package. Keep **all the files together**, with `index.html` at the root and `assets/` alongside it.
-2. On GitHub, create a **new public repository**, for example `sunlit-secrets`. This is a *separate* app from your health app. Upload the **contents of the unzipped folder**, not the ZIP file itself.
-3. Open **Settings → Pages**. Choose **Deploy from a branch**, `main`, `/(root)`, then **Save**.
-4. Open the HTTPS GitHub Pages URL shown there after GitHub builds the site. If your repository is named `sunlit-secrets`, the URL will generally have the form `https://YOURUSERNAME.github.io/sunlit-secrets/`.
-5. On iPhone, open the Pages URL in **Safari**. Use **Share → Add to Home Screen**, then open your new app icon.
-6. Open the game while online the first time, so the service worker can cache all art and code. Offline play can then work from the installed app after a successful first cache. Test it in Airplane Mode before relying on it.
+- `index.html`: fully self-contained playable game containing BOTH **original** scenery backgrounds and all 2,400 levels; also works if the `assets` directory is missing (except for the optional app icon).
+- `manifest.webmanifest` and `sw.js`: installability and updated offline cache with fresh-online navigation.
+- `assets/home-original.jpg` and `assets/game-original.png`: unchanged source images for future use, not required for the game to render.
+- `assets/icon-192.png`, `assets/icon-512.png`: iPhone / PWA icons.
+- `developer-source/`: editable copies of the original CSS and JavaScript. The runtime uses the versions already embedded in index.html; re-bundle if editing these sources.
 
-## Important notes
+## Game behavior
 
-- The user's supplied background art is included locally (compressed high-quality WEBP) so no network images are needed.
-- The two scenery backgrounds are preserved as actual art assets; gameplay UI is real HTML, CSS and JavaScript, not buttons painted into an image.
-- Save data stays in the browser on the device; it does **not** synchronize between devices. Use Settings → Save backup to export a file and Settings → Load backup to restore it. Clearing site storage can remove progress.
-- Original old Sunlit Secrets v1 save data is recognized where possible. The new sequential-lock requirement may restrict previously skipped levels until preceding levels are completed.
-- A service worker cannot fully work by double-clicking `index.html`; host over HTTPS (such as GitHub Pages) for installation and offline caching.
-- Some browser themes, safe areas and device sizes change where the real phone status icons appear; iOS owns those icons rather than the game drawing fake battery/time indicators.
+All 2,400 puzzle levels remain available in sequential order. You need to complete the current level before unlocking the next. Answers, hints, progress and backup/restore are retained. Progress is saved in local browser storage using the same save key as the previous version. No ads, subscriptions or online requests are required for gameplay after installation.
 
-## Files
+## Image troubleshooting
 
-- `index.html` — main entry point
-- `styles.css` — complete new warm floral interface
-- `app.js` — game logic, UI, storage, strictly sequential unlocking
-- `data.js` — original clues and first 48 sayings
-- `expansion.js` — additional 2,352 sayings
-- `assets/home.webp` — supplied first-page background
-- `assets/game.webp` — supplied gameplay background
-- `assets/icon-192.png`, `assets/icon-512.png` — app icons from supplied artwork
-- `manifest.webmanifest`, `sw.js` — add-to-home-screen / offline support
-
-## Testing performed
-
-- Syntax validation of all JavaScript files.
-- Browser-driven interaction tests of both screens, letter propagation, erase, hints, win celebration, next level, resume, and locked levels.
-- Programmatic coverage validation of all 2,400 puzzles, ensuring every letter appearing in the hidden saying is represented by a playable clue.
-- Mobile viewport tests at 320×568, 390×844 and 430×932; gameplay UI verified with zero reported JavaScript errors in Chromium.
-- Actual GitHub Pages publishing and physical iPhone install were not performed in this environment and should be checked after upload.
-
-Enjoy your garden. ❀
+This edition renders its scenery with two `data:image/jpeg;base64` URLs that are literally inside the HTML. No WebP support and no external image paths are required. If the imagery does not display, verify that you're on the new URL containing `release=v4-imagefix-20261028` and not an earlier cached version. `index.html` is approximately 2.4 MB because it contains the original home JPEG and an ultra-high-quality JPEG rendition of the game art (original PNG is also supplied). The included original files are provided separately for your convenience.

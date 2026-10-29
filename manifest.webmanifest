@@ -1,8 +1,8 @@
 {
   "name": "Sunlit Secrets \u2014 The Hidden Thought",
   "short_name": "Sunlit Secrets",
-  "description": "A beautiful ad-free offline number-and-word puzzle game with 2,400 levels.",
-  "start_url": "./index.html",
+  "description": "Ad-free, offline-friendly puzzle game with 2,400 levels.",
+  "start_url": "./index.html?release=v4-imagefix-20261028",
   "scope": "./",
   "display": "standalone",
   "background_color": "#7d4a41",

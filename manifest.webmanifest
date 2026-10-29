@@ -1,1 +1,24 @@
-{"name":"Sunlit Secrets — Word Puzzle Garden","short_name":"Sunlit Secrets","description":"An ad-free, offline word-and-number puzzle garden.","start_url":"./index.html","scope":"./","display":"standalone","background_color":"#fce8dd","theme_color":"#b97083","icons":[{"src":"assets/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},{"src":"assets/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}
+{
+  "name": "Sunlit Secrets \u2014 The Hidden Thought",
+  "short_name": "Sunlit Secrets",
+  "description": "A beautiful ad-free offline number-and-word puzzle game with 2,400 levels.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#7d4a41",
+  "theme_color": "#995b50",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

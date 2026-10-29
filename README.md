@@ -1,68 +1,55 @@
-# Sunlit Secrets — 2,400-Level Word Puzzle Garden
+# Sunlit Secrets — The Hidden Thought
 
-**A complete, private, ad-free, original word-and-number puzzle game.** Inspired by the general number-to-letter cryptogram mechanic of crossword-style puzzle games; this is an independent creation, **not affiliated with Figgerits or Hitapps**. It does not use that game's artwork, branding, level text, or proprietary assets.
+A cozy, ad-free, number-and-word puzzle game with **2,400 playable levels** and the exact sunset-balcony scenery you supplied.
 
-## Features
+## What you get
 
-- **2,400 playable, distinct levels**: six illustrated chapters with **400 levels each**.
-- **48 individually written sayings** from the original edition, plus **2,352 unique phrases systematically composed from curated scenic word lists and 28 original sentence templates**. These thousands of combinations are valid playable puzzles, but not 2,352 individually authored stories.
-- **242 original word-definition clues** recombined deterministically for each level. Every puzzle covers all the hidden phrase's letters, with a consistent one-to-one number/letter mapping.
-- **Six illustrated, original SVG scenes**, warm gardens, sunsets, coastlines, woodland, and a moonlit garden, complete with gentle animated fireflies and victory confetti.
-- Free unlimited hints, error checking, touchscreen keyboard, full keyboard support, no timers or penalties.
-- Progress saved on this browser/device, manual export/import of backup JSON, optional sounds and animations.
-- Free; **no advertising, in-app purchases, analytics, accounts, subscriptions, or runtime third-party dependencies**.
-- Installable progressive web app (PWA), which caches its assets for offline play after the first successful hosted load.
+- Beautiful, uncluttered start screen featuring your glowing lakeside bunny-balcony background
+- Beautiful gameplay screen using your floral lake background and warm wooden puzzle panels
+- Number-to-letter cryptogram clues that reveal a hidden saying
+- 2,400 distinct hidden sayings, including 48 individually authored originals and 2,352 template-built variations
+- Level progression in **strict order**: finish the current level before unlocking the next
+- Unlimited free hints, erase, check answers, touch-friendly QWERTY keyboard and physical keyboard support
+- Automatic local progress, backup/restore, optional sound and animation settings
+- No ads, subscription, external analytics, account or tracking; static files only
+- Progressive web app (PWA) and offline cache after the first successful online visit
 
-## Upload to GitHub Pages
+## Publish on GitHub Pages
 
-**Important: GitHub Pages cannot deploy a ZIP file as a single ZIP. You must unzip it first.**
+1. Unzip the package. Keep **all the files together**, with `index.html` at the root and `assets/` alongside it.
+2. On GitHub, create a **new public repository**, for example `sunlit-secrets`. This is a *separate* app from your health app. Upload the **contents of the unzipped folder**, not the ZIP file itself.
+3. Open **Settings → Pages**. Choose **Deploy from a branch**, `main`, `/(root)`, then **Save**.
+4. Open the HTTPS GitHub Pages URL shown there after GitHub builds the site. If your repository is named `sunlit-secrets`, the URL will generally have the form `https://YOURUSERNAME.github.io/sunlit-secrets/`.
+5. On iPhone, open the Pages URL in **Safari**. Use **Share → Add to Home Screen**, then open your new app icon.
+6. Open the game while online the first time, so the service worker can cache all art and code. Offline play can then work from the installed app after a successful first cache. Test it in Airplane Mode before relying on it.
 
-1. Unzip `sunlit-secrets-2400-github-ready.zip` on your computer (or extract its contents through your preferred Git workflow).
-2. On GitHub, create a **new** repository, for example `sunlit-secrets-game` (do not overwrite your existing health app).
-3. Open **Add file → Upload files**, then upload all the extracted site files and the `assets` folder to the **repository root**. The homepage `index.html` must be at the top level, **not** in an extra `sunlit-secrets/` folder. For folder uploads, dragging the extracted folder's contents into GitHub's upload interface or using GitHub Desktop is often easiest.
-4. Commit the files on your default (`main`) branch.
-5. Go to **Settings → Pages → Build and deployment**. Set source to **Deploy from a branch**, branch **main**, folder **/(root)**; save.
-6. After GitHub shows a published HTTPS Pages link, open it in Safari on your iPhone and choose **Share → Add to Home Screen**. Launch your game from the Home Screen.
-7. Open the game online once so the service worker can cache all local assets. After that it can work offline as long as browser storage remains intact.
+## Important notes
 
-Your progress stays local to the site and device. **If you switch URLs/domains or browsers, progress will not transfer automatically**; export from the old game via **Settings → Export backup**, then import the JSON backup in the new game.
+- The user's supplied background art is included locally (compressed high-quality WEBP) so no network images are needed.
+- The two scenery backgrounds are preserved as actual art assets; gameplay UI is real HTML, CSS and JavaScript, not buttons painted into an image.
+- Save data stays in the browser on the device; it does **not** synchronize between devices. Use Settings → Save backup to export a file and Settings → Load backup to restore it. Clearing site storage can remove progress.
+- Original old Sunlit Secrets v1 save data is recognized where possible. The new sequential-lock requirement may restrict previously skipped levels until preceding levels are completed.
+- A service worker cannot fully work by double-clicking `index.html`; host over HTTPS (such as GitHub Pages) for installation and offline caching.
+- Some browser themes, safe areas and device sizes change where the real phone status icons appear; iOS owns those icons rather than the game drawing fake battery/time indicators.
 
-## Files you need at the repository root
+## Files
 
-```
-index.html                Web app entry point
-styles.css                Warm responsive desktop and phone UI
-app.js                    Puzzle game, progress, selection, hints, chapter navigation
-manifest.webmanifest      Installability / iPhone home-screen metadata
-sw.js                     Offline-cache service worker
-data.js                   Original 48 sayings + clue dictionary
-expansion.js              2,352 distinct composed sayings bundled for offline use
-assets/                   Six scenic SVGs + app icons
-README.md                 This guide
-```
+- `index.html` — main entry point
+- `styles.css` — complete new warm floral interface
+- `app.js` — game logic, UI, storage, strictly sequential unlocking
+- `data.js` — original clues and first 48 sayings
+- `expansion.js` — additional 2,352 sayings
+- `assets/home.webp` — supplied first-page background
+- `assets/game.webp` — supplied gameplay background
+- `assets/icon-192.png`, `assets/icon-512.png` — app icons from supplied artwork
+- `manifest.webmanifest`, `sw.js` — add-to-home-screen / offline support
 
-The ZIP intentionally includes only the files needed to publish, along with this README. The optional generator and test scripts are kept separately in the development workspace.
+## Testing performed
 
-## Play without uploading anything
+- Syntax validation of all JavaScript files.
+- Browser-driven interaction tests of both screens, letter propagation, erase, hints, win celebration, next level, resume, and locked levels.
+- Programmatic coverage validation of all 2,400 puzzles, ensuring every letter appearing in the hidden saying is represented by a playable clue.
+- Mobile viewport tests at 320×568, 390×844 and 430×932; gameplay UI verified with zero reported JavaScript errors in Chromium.
+- Actual GitHub Pages publishing and physical iPhone install were not performed in this environment and should be checked after upload.
 
-The separate file **`sunlit-secrets-play-2400.html`** is a complete one-file standalone edition (styles, art, and 2,400 levels embedded). Open it in a desktop browser with no network connection. Some browsers restrict persistent storage for local `file://` pages; for reliable saved progress and iPhone installation, use GitHub Pages / HTTPS.
-
-## Puzzle construction and continuity
-
-The original edition's **first 48 level identifiers** are preserved so saved answers continue to refer to the same puzzles. Each of the six chapters starts with its original eight individually written sayings, followed by 392 more. Expanded levels use unique curated-template-composed sayings; the clue bank is reused in different deterministic configurations (you will see repeated clue definitions across levels). All 2,400 levels are selectable from the chapter screen via 40-level pages.
-
-The local save key and backup version remain the same, making existing backups from the 48-level version importable. Never count on browser storage surviving if the user clears site data, deletes the app, uses private browsing, or changes domains; use manual backup.
-
-## Tests performed
-
-- Node.js syntax validation for all JavaScript files.
-- Exhaustive generation of all **2,400 levels**; checked number/letter uniqueness and full secret-phrase character coverage.
-- Automated hint-to-completion and wrong-letter rejection tests.
-- Automated Chromium interactions on a **390×844 mobile viewport and 1440×900 desktop viewport**, using the standalone HTML in an in-memory page: home, chapter selection, paging to level 361, free hint, number-to-letter input, secret phrase victory, and next puzzle. No JavaScript errors in those tested flows.
-- Package archive integrity and linked-asset checks.
-
-**Limits of verification:** This environment's browser blocks navigation to `file://` and `http://127.0.0.1`, so Chromium tests were carried out using embedded content. An actual GitHub Pages deployment, mobile Safari installation, service-worker offline lifecycle, and long-term device storage have not been physically verified; test these once deployed. No cloud sync or multiplayer included.
-
-## Credit
-
-The game artwork, puzzle content, data, and code are original to this independent project. The number-to-letter clue mechanic is a general puzzle-game mechanic and is not a claim of affiliation with Figgerits.
+Enjoy your garden. ❀

@@ -1,27 +1,25 @@
-# Sunlit Secrets — Image-Reliable Edition
+# Sunlit Secrets — Approved Floral Sunset Layout (v5)
 
-This fixes the missing-background issue. The two original supplied scenic backgrounds, the full 2,400-level puzzle data and all game code are **embedded directly into index.html**. The page does not request separate CSS, JS, or background assets, so uploading `index.html` alone is enough to play online or from a local file.
+This edition reworks the actual interactive game to match the **two supplied screenshots**. It uses the original user-supplied blank artwork for the home and game scenes, plus a carefully feathered, transparent crop of the approved **circular floral Play button**. The screens now have a large, round button, a higher title, more generous separation, larger keyboard keys and roomier wooden clue panels.
 
-## Replace the old GitHub Pages version
+## Put it on GitHub Pages
 
-1. Unzip this archive.
-2. Open your GitHub game repository. Remove or overwrite the old `index.html`, `manifest.webmanifest`, `sw.js` and `assets` content. Upload the **contents** of this ZIP, not the ZIP itself, making sure `index.html` is at the root of the repository.
-3. Wait for GitHub Pages to publish the commit.
-4. **Important for people who installed the previous edition:** Open `https://YOUR-USERNAME.github.io/YOUR-REPO/index.html?release=v4-imagefix-20261028` in Safari. This exact query string bypasses the original service worker's cached homepage and installs the replacement cache. Reload once after the new page opens. If an old iPhone Home Screen icon still shows the broken edition, remove that icon and add the updated site to your Home Screen again.
-5. Once the updated game loads, test offline use by disconnecting Wi-Fi/mobile data after the initial successful installation.
+1. Unzip this package. Upload the **files inside** the extracted folder to the root of your existing Sunlit Secrets GitHub repository, replacing earlier files (including `index.html`, `sw.js`, `manifest.webmanifest`).
+2. Ensure GitHub Pages is configured to deploy `main` from `/ (root)`.
+3. Visit `https://YOUR-USERNAME.github.io/YOUR-REPO/index.html?release=v5-approved-layout-20261029` once in Safari to bypass older cached HTML. After the site displays the corrected design, choose Share → Add to Home Screen.
+4. Existing saves use the same localStorage key, `sunlit-secrets-progress-v1`. Do not clear website data. Use Settings → Save backup for an extra copy.
 
-## What is included
+## Guarantees and limits
 
-- `index.html`: fully self-contained playable game containing BOTH **original** scenery backgrounds and all 2,400 levels; also works if the `assets` directory is missing (except for the optional app icon).
-- `manifest.webmanifest` and `sw.js`: installability and updated offline cache with fresh-online navigation.
-- `assets/home-original.jpg` and `assets/game-original.png`: unchanged source images for future use, not required for the game to render.
-- `assets/icon-192.png`, `assets/icon-512.png`: iPhone / PWA icons.
-- `developer-source/`: editable copies of the original CSS and JavaScript. The runtime uses the versions already embedded in index.html; re-bundle if editing these sources.
+- `index.html` embeds all CSS, scripts, both scenic backgrounds and the floral Play-button image directly. It can run by itself on a computer and avoids missing asset folder issues.
+- Contains the same 2,400 word puzzles, clue numbers, letter filling, unlimited hints, check work, backspace, sound, backup/restore and strict level-by-level unlocking as before. Only the presentation layer was rebuilt.
+- The puzzle clue section scrolls internally when a level has more than three clues. Longer sayings can scroll within the saying area, rather than shrinking their letters to unreadable sizes.
+- On a very small phone, fewer clues may be visible at once; scroll the wood panel to continue. This is intentional, not a broken layout.
+- Mobile Safari and installation behavior should be checked on your actual iPhone after deployment; local tests use Chromium phone-sized viewports.
 
-## Game behavior
+## Project files
 
-All 2,400 puzzle levels remain available in sequential order. You need to complete the current level before unlocking the next. Answers, hints, progress and backup/restore are retained. Progress is saved in local browser storage using the same save key as the previous version. No ads, subscriptions or online requests are required for gameplay after installation.
-
-## Image troubleshooting
-
-This edition renders its scenery with two `data:image/jpeg;base64` URLs that are literally inside the HTML. No WebP support and no external image paths are required. If the imagery does not display, verify that you're on the new URL containing `release=v4-imagefix-20261028` and not an earlier cached version. `index.html` is approximately 2.4 MB because it contains the original home JPEG and an ultra-high-quality JPEG rendition of the game art (original PNG is also supplied). The included original files are provided separately for your convenience.
+- `index.html`: complete standalone game; graphics built into the file.
+- `app.js`, `data.js`, `expansion.js`, `styles.css`: separately readable and editable sources. To edit the live version, rebuild or directly edit `index.html`, because it is self-contained.
+- `assets/`: your original clean home/game backgrounds, floral Play artwork, and PWA icons.
+- `sw.js`, `manifest.webmanifest`: installability/offline support and new cache version.
